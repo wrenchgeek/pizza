@@ -13,9 +13,9 @@ describe('Pizza', function() {
   });
 
   it("adds additional cost for each topping", function() {
-    var testPizza = new Pizza("Large", ["Pepperoni"]);
+    var testPizza = new Pizza("Large");
+    testPizza.toppings.push("Pepperoni");
     testPizza.calculatePrice();
     expect(testPizza.price).to.equal(16);
   })
-
 });

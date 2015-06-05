@@ -1,7 +1,6 @@
 function Pizza(size, toppings, price) {
   this.size = size;
   this.toppings = [];
-  // debugger;
   this.price = 0;
 
   this.calculatePrice = function() {
@@ -14,24 +13,28 @@ function Pizza(size, toppings, price) {
     } else {
       this.price += 17;
     }
-    // toppings.forEach(function() {
-    //   this.price += 1;
-    // });
+
+    this.price += this.toppings.length;
+  }
+
+  this.addToppings = function() {
+    var pizzaToppings = [];
+    $("#pizza-toppings input:checkbox:checked").each(function() {
+      pizzaToppings.push($(this).val());
+    });
+    this.toppings = pizzaToppings;
   }
 }
 
-(function(event) {
-  event.precentDefault();
-
+$(function() {
 
   $('form#pizza-order').submit(function(event) {
     event.preventDefault();
-    var size = $(".size");
-
-    var newPie = new Pizza(size, toppings);
+    var size = $(".size").val();
+    newPie = new Pizza(size);
     newPie.calculatePrice();
-    debugger;
+    newPie.addToppings();
     $("#pizza-order-form").hide();
+    $("#pizza-output").append('<p>' + newPie.size + ' ' + newPie.toppings + ' ' + newPie.price + '</p>')
   });
-
 });

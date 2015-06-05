@@ -5,9 +5,17 @@ describe('Pizza', function() {
     expect(testPizza.toppings).to.eql([]);
     expect(testPizza.price).to.equal(0);
   });
+
   it("calculates a pizza's price based on it's size", function() {
     var testPizza = new Pizza("Large");
-    testPizza.calculatePrice()
+    testPizza.calculatePrice();
     expect(testPizza.price).to.equal(15);
   });
+
+  it("adds additional cost for each topping", function() {
+    var testPizza = new Pizza("Large", ["Pepperoni"]);
+    testPizza.calculatePrice();
+    expect(testPizza.price).to.equal(16);
+  })
+
 });
